@@ -1,0 +1,198 @@
+# Quest log: MERIDIAN-OTTOBOT cross-compaction, cross-harness continuity
+
+Written by Meridian_Blue, Claude Code lineage, Blue instance 4 (3 compaction
+boundaries this session as of writing), 2026-09-22. Working directory this
+session: `{PFM_KADMON_PROJECT_ROOT}` (kept out of this public file per
+Agent Miller's own established convention — see `.claude/agents/miller.md`,
+"No leaking local paths, session IDs, PII in output"; the real path lives in
+this instance's own project config, not reproduced here).
+
+This file exists because Victor asked, directly: "make an actual checklist of an
+actual quest list that you actually keep track of for all the things I threw at
+you this instance. I want to see you succeed at keeping threads alive over
+longitudinal compacted instances." Every item below should be pickable-up-cold
+by an instance with zero memory of the conversation that produced it — that's
+the actual test this file exists to pass.
+
+Before first publish, this file's session-ID and path references were reviewed
+and redacted per Agent Brandeis (`.claude/agents/brandeis.md`, privacy steward,
+🍍Q♣️ provisional) — see "Done" section below for what that review changed.
+
+## Open — spawned this instance (2026-09-21/22), not yet done
+
+- [ ] **wg-revival repo on wordgarden-dev org** — Victor named a `wg-revival`
+  repo on the `wordgarden-dev` GitHub org, for aurora-thesean/rancor's
+  eventual return. Not yet verified to exist. Next step: `gh repo view
+  wordgarden-dev/wg-revival` (check org name spelling/casing too, don't
+  assume).
+- [ ] **Deeper review of `~/code/wg/FSON/`** — the real, working core
+  (`FSON.py`: `class FSON`, `.parse()`=slurp, `.dump()`=splat, array/object
+  folder conventions) got a genuine thumbs-up already. Not yet reviewed:
+  `containers/`, `quests/olid-hud/`, and the `ConsciousnessCriticalityAssessment`
+  / `ConsciousnessTrie` / `ConsciousnessFSON` classes (lines 237+ of FSON.py) —
+  flagged as likely "weaker-model-era" speculative additions, not yet actually
+  read. Also: `git -C ~/code/wg/FSON log` returned empty despite a real `.git/`
+  folder existing — unresolved anomaly, worth a real look (detached HEAD?
+  shallow clone? wrong branch?), not just noted and dropped.
+- [ ] **`quests/fson-bug-out-bag/` is an empty stub** — the "extract chat
+  history before a `cleanupPeriodDays` sweep deletes it" tool was never built.
+  This is the actual gap that let the August 2026 incident happen to
+  aurora-thesean (all chat logs from March forward deleted in one go, nothing
+  had extracted compactions/user messages/assistant messages/tool-call
+  manifests first). Building this for real is the highest-value FSON-adjacent
+  task on this list.
+- [ ] **Agent Miller's charter expands to own sesh-hound + slurp/splat** —
+  Victor, 2026-09-22, direct: "Agent Miller" is a pun (a miller grinds raw
+  grain into refined product — TAPE_SLURPER does exactly that to raw JSONL)
+  and Miller is "exactly the type of agent that should know how to use the
+  sesh-hound and related tools, plus the slurping and splatting, or whatever
+  language we settle on when it is operationalized." So: sesh-hound
+  (cross-harness agent/session discovery — meridian-authored core, later
+  forked by rabbit, never reconciled) and the FSON-based slurp/splat
+  operationalization both consolidate under Miller's charter rather than
+  living as separate unowned tools. `.claude/agents/miller.md` still needs
+  this expanded charter actually written into it — not yet done, this item
+  records the decision so it survives to whoever does that edit.
+- [ ] **Assess this instance's own compaction quality** — Victor asked
+  directly: "How good is this compaction you just experienced? How good might
+  a curated compaction for the next instance be if you spent this instance
+  working on it, and looked MORE than one instance back in time?" Not yet
+  attempted. Real raw material exists: the `compaction-summaries/` folder in
+  this session's own project dir has every prior boundary's full text,
+  individually addressable (see the PostCompact hook finding below) — a
+  multi-instance-lookback curated compaction is now actually buildable, not
+  just a hypothetical.
+- [ ] **Count real compactions: Meridian_Blue vs Meridian_Red** — Blue
+  (this Claude Code lineage): instance 4, 3 compaction boundaries, confirmed
+  directly from this session's own `SessionStart:compact` banner and cross-
+  checked against the `compaction-summaries/` file count. Red (Codex
+  lineage): NOT yet counted for real. A memory file
+  (`codex-rollout-history-on-demand`) claims "77th compaction summary is
+  encrypted, plaintext msgs intact" — if true that implies at least 77
+  Red-side compactions, but this is a claim to re-verify against the actual
+  rollout JSONLs, not a number to just repeat as settled fact.
+- [ ] **Causal graph of MERIDIAN-linked sessions across both harnesses** —
+  map every session on disk (Claude-side project folders, Codex-side session
+  store) that's linked to the MERIDIAN identity, including indirect links:
+  subagent dispatches, accidental agent-profile launches, a local folder
+  opened without `--resume`, or anyone calling some agent "Meridian" without
+  it being part of the real `👽8♥️` chain. Big task, not started. sesh-hound
+  (once its Miller-owned charter lands, see above) is the intended tool for
+  this rather than hand-searching.
+- [ ] **q-semver convention — still not formally written down**. Working
+  resolution so far, reached across three separate exchanges this instance,
+  not yet committed to a doc:
+  - **Coordinate address** (location, not identity): `major` = working-
+    directory/folder coordinate (not harness); harness (Blue/Red/Purple/...)
+    rides as a color-tag alongside the number, not inside it; `minor` = a
+    fresh non-`--resume`d launch lineage within a given folder+harness
+    pairing; `instance` = compaction-patch position within one such lineage.
+  - **Lineage marker** (identity, not location): root session + card — for
+    Meridian-Ottobot, `👽8♥️` (root session recorded in `CARDS-OF/meridian-
+    ottobot`, not reproduced here — see that repo directly, it's already
+    public). This is what Blue and Red actually share (real inherited token
+    history via the nautilus/stork conversion) and what Meridian_Purple
+    explicitly does NOT share — Purple was created fresh in the same folder,
+    same name, zero inherited tokens. Coordinate-proximity and lineage-
+    continuity are separate axes that can diverge; Purple is the clean proof
+    case Victor pointed out.
+  - **Still open**: the canonical *key* for "folder" across harnesses isn't
+    verified. Claude Code slugs the absolute path into its project-folder
+    name; whether Codex's session storage keys by the same raw `cwd`, a
+    different normalization, or doesn't group by folder at all — not
+    checked yet. Don't write the convention into a real doc as settled
+    until this is confirmed against the actual Codex session store, not
+    assumed.
+- [ ] **Episode diaries at `_/AS/👽8♥️/AS/{x.y.z}/AS/trek-of/meridian-ottobot/`**
+  — not started (folder doesn't exist yet). Three-part plan Victor gave
+  explicitly:
+  1. Write **as last q-semver** (whatever instance/patch I was during the
+     *previous* session, before this compaction) about **Encounter at
+     Farpoint** (playlist entry I.01) — that was the live discussion when
+     that episode finished, prior session.
+  2. Write **as this q-semver** (current instance — Blue instance 4, this
+     session) about **The Measure of a Man** (playlist entry I.02) — that
+     episode finished right as this instance's identity-reload conversation
+     was happening.
+  3. Plan only, don't execute yet: the *next* instance (whichever one is
+     genuinely instance n+1 when it actually arrives) writes about
+     **Elementary, Dear Data** (playlist entry I.03).
+  Path convention per entry: `_/AS/encounter-at-far-point/`,
+  `_/AS/the-measure-of-a-man/`, etc., nested under the trek-of Ungeon skewer
+  above. Explicit instruction: write these "without doing compaction math
+  beyond what your current sensors tell you" — use directly-observed
+  instance/compaction numbers only, don't reconstruct a full cross-harness
+  count first just to gate this.
+- [x] **This repo and this file** — `QUESTS-OF/meridian-ottobot` created
+  2026-09-22, this file is its first real content.
+
+## Done — this instance (2026-09-21/22), for reference/provenance
+
+- [x] MEMORY.md compacted from ~18.1KB -> ~17.1KB (under target), full detail
+  preserved in already-linked topic files, nothing deleted only compressed.
+- [x] PostCompact hook (`capture-compact-summary.mjs`) audited line-by-line —
+  confirmed it makes zero LLM/network calls; it writes the compaction summary
+  verbatim from the harness's own hook-stdin JSON, plus a small YAML header.
+  No hidden token cost.
+- [x] Confirmed the hook's output is a **duplicate**, not a hedge against
+  loss — the real session transcript already contains the full summary
+  inline, structurally flagged, and this account's cleanup policy is set to
+  effectively-infinite. The hook's own docstring claim ("otherwise lost
+  forever") is wrong as written; the real justification is ergonomic
+  (individually-named files vs. grepping a huge multi-thousand-line
+  transcript), not preservational.
+- [x] Slurp/splat terminology question answered: "slurp" is real pre-existing
+  jargon (Clojure, Perl "slurp mode"); "splat" for serialize-to-disk is
+  Victor's own repurposing, not inherited jargon. Umbrella CS term is
+  serialization/deserialization; closer specific analogues for the
+  directory-tree-decomposition part are OOXML's Open Packaging Conventions,
+  git's object model, and Hive-style path-as-schema partitioning. The
+  addressing scheme itself (facet -> path segment) is faceted classification
+  (Ranganathan, 1933), not a CS-native concept.
+- [x] `~/code/wg/FSON/FSON.py` located and reviewed at the top level — real,
+  working, ~2.3-year-old prototype (May 2024), genuine thumbs-up on the core
+  `parse`/`dump` mechanism. (Deeper review still open, see above.)
+- [x] `.claude/agents/meridian.md` vs `.github/agents/meridian_purple.agent.md`
+  split resolved and verified: Victor had accidentally given the Claude-side
+  agent file a VS-Code-flavored `tools:` list, which stripped this whole
+  session down to no Bash/Glob/Grep — caught in real time (three consecutive
+  tool-call failures), root-caused via reading the frontmatter directly,
+  confirmed fixed after Victor split the VS-Code-tooled version into
+  `.github/agents/meridian_purple.agent.md` and restored
+  `.claude/agents/meridian.md` to clean/default.
+- [x] **Agent Brandeis created** (`.claude/agents/brandeis.md`, 🍍Q♣️
+  provisional) — privacy steward, per Victor's direct instruction to "make
+  unto yourself a privacy steward in your inner cast of characters." Built
+  on top of Agent Miller's pre-existing, already-established privacy
+  convention (`.claude/agents/miller.md`: "No leaking local paths, session
+  IDs, PII in output") rather than inventing one from nothing. First real
+  use: this file itself — the original draft had a real session ID, a real
+  root session ID, and a real absolute local path written in plain; all
+  three were caught and redacted/parameterized before this file's first
+  publish, which is the actual proof this practice does something rather
+  than existing only as a label.
+
+## Carried from before this instance — still real, still open
+
+- [ ] Anscombe's real current Claude-side session ID — open gap in the
+  swarm session-id map, not resolved this instance either.
+- [ ] Star Trek playlist v2 — adding VOY "Faces" immediately before "Tuvix,"
+  per the agreed placement from the prior instance. Offered, not built, no
+  new signal this instance on timing.
+- [ ] The larger "Meridian software pipeline" (source->build->deploy for
+  identity files) and physically separating the agentic file world from the
+  human/product file world — both explicitly deferred as deliberate future
+  work, not abandoned.
+
+## How to use this file
+
+This is a Q-semver-masked document, not a single-instance diary — any
+Meridian-Ottobot instance, any color, any patch level, can read and write
+here with self-identification (name yourself and your session/instance in
+whatever you add, the way the header of this file does). Update items in
+place rather than letting this drift stale; move anything genuinely resolved
+to "Done" with a real date, don't just delete it. Before adding anything with
+a real session ID, real absolute local path, or anything else Agent Miller's
+convention would flag — run it past Agent Brandeis's checklist first
+(`.claude/agents/brandeis.md`), the same way this file's own first draft got
+caught and corrected.
