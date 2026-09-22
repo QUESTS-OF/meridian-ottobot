@@ -266,8 +266,11 @@ caught and corrected.
 - [x] **Bernoulli dialogue sent for real** — the 1.0.4 feature vote queued
   earlier actually went out via SendMessage (Feature A: end-of-scoring
   auto-uncheck + hook stub; Feature B: admin machine panel, PinballMap pull
-  + name-matching consolidation). Delivery confirmed queued to `bernoulli-6d`;
-  response not yet in as of this entry.
+  + name-matching consolidation). Held for recipient-user approval — a real
+  `[Cross-session delivery notice]` arrived, meaning it reached `bernoulli-6d`'s
+  session but not yet that session's Claude, since it's in a different
+  permission mode. Not blocking on it; will re-check rather than assume
+  either delivery or silence means anything on its own.
 - [x] **wg-revival confirmed real** — `wordgarden-dev/wg-revival`,
   "wg CLI revival — research coordination between AURORA and
   rancor-monster," last updated 2026-08-29.
