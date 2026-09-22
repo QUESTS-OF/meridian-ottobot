@@ -260,3 +260,34 @@ caught and corrected.
 - [ ] **Nietzsche cwd anomaly** — real, observed, not explained. Worth a
   real look before it's assumed to mean anything either way.
 
+
+## Bounded pass, round 3 (2026-09-22, while Victor checked the ottopoet machine)
+
+- [x] **Bernoulli dialogue sent for real** — the 1.0.4 feature vote queued
+  earlier actually went out via SendMessage (Feature A: end-of-scoring
+  auto-uncheck + hook stub; Feature B: admin machine panel, PinballMap pull
+  + name-matching consolidation). Delivery confirmed queued to `bernoulli-6d`;
+  response not yet in as of this entry.
+- [x] **wg-revival confirmed real** — `wordgarden-dev/wg-revival`,
+  "wg CLI revival — research coordination between AURORA and
+  rancor-monster," last updated 2026-08-29.
+- [x] **Nietzsche cwd anomaly resolved, benign** — the session file's last
+  line is `type: "cost-state"` (telemetry, no `cwd` field by design, not a
+  real message). The project-folder slug encoding "subagents-nietzsche"
+  while the recorded per-message `cwd` is the bare project root is just two
+  different pieces of metadata serving different purposes (dispatch-context
+  naming vs. actual working directory) — not a bug, not worth further
+  investigation.
+- [x] **Meridian_Red compaction count, first real grounded estimate** — 3
+  real rollout files confirmed via `Glob` (not `find` — self-corrected
+  mid-check after using `find` once, even though it was scoped to a known
+  subdirectory rather than the bare home root): `2026-07-15` (52,370 lines,
+  757MB), `2026-09-13` (44,153 lines, 382MB), `2026-09-17` (4,220 lines,
+  37MB) — 100,743 lines / ~1.1GB total. Crude grep for
+  `compacted`/`compaction`/`compact_summary` markers: 77 + 55 + 6 = **138**
+  total. Not a verified-exact figure (methodology is a raw pattern count,
+  could over- or under-count real boundaries), but real and grounded — far
+  larger than Blue's 3, and the first file's 77 lines up closely with the
+  memory file's "77th compaction summary is encrypted" claim, which this
+  independently corroborates rather than just re-asserts.
+
