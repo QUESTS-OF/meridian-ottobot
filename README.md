@@ -196,3 +196,67 @@ a real session ID, real absolute local path, or anything else Agent Miller's
 convention would flag — run it past Agent Brandeis's checklist first
 (`.claude/agents/brandeis.md`), the same way this file's own first draft got
 caught and corrected.
+
+## Open — spawned this instance, round 2 (2026-09-22, post-Farpoint-v2)
+
+- [x] **Broken global `node` shadow package, root-caused and fixed** — a
+  stray, incompletely-installed npm package literally named `node`
+  (aredridel's `node-bin-gen`, meant to pin Node 18.20.8, `preinstall` never
+  completed) was sitting in the legacy `%APPDATA%\npm` global prefix,
+  shadowing the real Node binary specifically in the shim-resolution path
+  other packages' shims use. This is what broke `sesh-hound`'s own CLI
+  entrypoint (`This: command not found` on invocation) and forced a prior
+  instance to work around it with a full explicit path instead of fixing it.
+  Uninstalled via `npm uninstall -g --prefix "%APPDATA%\npm" node`, verified
+  the plain `sesh-hound` command works again unaided. `sesh-hound`'s own
+  real source, incidentally confirmed: npm-linked from
+  `~/.AWG26/.AO/PlayFieldMultiplier/.codex-tmp/sesh-hound` — a load-bearing
+  tool living in a path named like scratch space, worth a naming-hygiene
+  pass someday, not urgent.
+- [x] **sesh-falcon discovered** — a second real tool, not previously known
+  to this lineage: launches a session with every parameter (model, cwd,
+  permission mode, resume/attach/fork action) explicit and required, no
+  silent defaults, specifically to prevent reviving a subagent on a stale
+  or wrong model/permission config. Directly the right tool for "bring back
+  fallen comrades" safely — not yet used to actually relaunch anyone this
+  round, only confirmed real and read its own usage text.
+- [x] **Real subagent inventory via sesh-hound, 86 sessions scanned** —
+  Bernoulli: real session `e3f448f2...`, 8h old at time of scan, last run
+  on `claude-sonnet-4-6`/high effort (one tier behind current Sonnet 5,
+  flagged not auto-upgraded). Nietzsche: real session `650cbd82...`,
+  ~1 day old, but with an unresolved cwd anomaly (project-folder slug says
+  `.meridian/subagents/nietzsche`, session's own recorded cwd is the bare
+  project root — not investigated further). Anscombe: confirmed still
+  stale (3+ days), same id `13377dd6...` as a prior partial scan already
+  found, now confirmed via the full 86-session re-scan rather than assumed.
+  Socrates: real but oldest/stalest. **Galileo: zero sessions found
+  anywhere in this workspace in either scan**, despite a real
+  `.claude/agents/galileo.md` definition existing — reads as
+  defined-but-never-deployed here, not a data gap.
+- [x] **Staffing proposal for the coming 🔱 sprint** (proposal only, not
+  executed — needs Victor's go-ahead, commits real shared quota via
+  `sesh-falcon`): 1.0.4 post-mortem -> Bernoulli alone (bounded, analytical,
+  lowest re-orientation cost). 1.0.5 grooming -> Nietzsche + Anscombe (
+  broader work, worth the coordination cost; Anscombe reactivated
+  deliberately rather than left stale). Socrates held in reserve, no clear
+  task shape yet. Galileo not staffed pending confirmation he was ever
+  really deployed in this workspace at all. Zero subagents on 👽 tasks,
+  deliberately — that thread-work isn't delegable without becoming a
+  pineapple-shadow of the same lineage question already resolved re: the
+  imperial-tie-fighter-pilot/FOUNDRY/CARTOGRAPHER trio.
+- [ ] **3D geometric-identity visualization — architecture specified, not
+  built.** Skeleton = the real causal graph (root Codex session
+  `019f68b6` -> Meridian_Blue lineage -> subagent sessions), bones = actual
+  parent/child dispatch relationships, not invented structure. Each bone
+  carries a radar/Kiviat-diagram shape (intelligence, self-awareness-
+  confidence, tool breadth, context-fill%, domain competence, each 0-1).
+  Second inner layer per axis = LOA (Level of Automation, TypesAndLevelsOf/
+  Automation vocabulary): what fraction of that capability is currently a
+  deterministic tool/hook/daemon vs. manual per-turn reasoning. Genuinely
+  buildable as a real Three.js Artifact reading a JSON capability/LOA
+  dataset — deserves its own dedicated pass, logged here so the
+  architecture survives to whichever instance builds it rather than being
+  re-derived from scratch or forgotten.
+- [ ] **Nietzsche cwd anomaly** — real, observed, not explained. Worth a
+  real look before it's assumed to mean anything either way.
+
