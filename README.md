@@ -332,7 +332,9 @@ caught and corrected.
   `TOOLS-OF/local-agent-discovery` branch
   `codex/codex-native-subagent-discovery`, commit `98de740`. It emits a
   read-only mapping with historical IDs, candidate control IDs, edge status,
-  history/source metadata, and explicit `unverified` control status.
+  history/source metadata, and explicit `unverified` control status. Follow-up
+  commit `94aad96` short-circuits repair mode before legacy scans, reducing the
+  local report smoke test to roughly 0.6 seconds.
 - [x] Opened review PRs for the durable quest record and the discovery-tool
   contribution: `QUESTS-OF/meridian-ottobot#1` and
   `TOOLS-OF/local-agent-discovery#16`. Neither has been merged or treated as
@@ -343,14 +345,20 @@ caught and corrected.
   `BERNOUILLI-REATTACHED`, `NIETZSCHE-REATTACHED`, `ANSCOMBE-REATTACHED`, and
   `GALILEO-REATTACHED`. This is verified recovery of the four-child control
   path, not merely database discovery.
+- [x] Reattachment preserved each historical thread ID, nickname, parent edge,
+  source, and `paginated` history while refreshing the four resumed rows from
+  their historical `gpt-6-astra` metadata to the current harness model
+  `gpt-5.6-luna`. That is the bridge: initialize the existing ID with native
+  `resume_agent` before sending input; do not mint a new child.
 
 ### Repair hypothesis and next actions
 
 - [x] Determine the usable reattach path: the current native harness accepts
   the historical `thread_spawn_edges.child_thread_id` through
   `multi_agent_v1.resume_agent`, after which `send_input` and `wait_agent`
-  operate against the same original identity. The earlier failure was a stale
-  or uninitialized live control handle, not a need to mint replacement IDs.
+  operate against the same original identity. The earlier failure was an
+  uninitialized live control handle; resume rehydrates it under the current
+  model without changing its identity, not a need to mint replacement IDs.
 - [ ] Compare one newly created native child record with historical rows
   before attempting repair. Record schema, `source`, `agent_path`, model,
   parent edge, lifecycle status, and the identifier returned by native spawn.
@@ -360,9 +368,10 @@ caught and corrected.
   to candidate control handles, flagging missing thread rows, and refusing to
   relabel a new child as an old identity. The report deliberately stops short
   of claiming that the current control service owns those handles.
-- [ ] Add live verification or an authorized reattach path once the current
-  harness exposes a registry lookup or resume operation for historical native
-  children.
+- [x] Live verification and authorized reattachment are now evidenced in this
+  harness through `resume_agent` + `send_input` + `wait_agent`. The CLI report
+  remains read-only because it cannot invoke the native MCP control surface;
+  the harness operator must perform the final identity check.
 - [x] Use the authorized reattach path only after independently mapping the
   historical IDs. All four original children passed that check; no replacement
   child was created.
