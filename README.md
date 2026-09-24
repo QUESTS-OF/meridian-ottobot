@@ -323,6 +323,16 @@ caught and corrected.
 - [x] The native control call was tested with Bernoulli’s recorded child ID
   and returned `agent ... not found`. Discovery and control are separate
   surfaces; the database record alone is not a resumable control handle.
+- [x] The state schema inventory found one remote-control enrollment but no
+  external-agent imports or dynamic-agent-tool rows. All five child edges use
+  the same historical `subagent` source shape, `gpt-6-astra` model,
+  `paginated` history, and blank `agent_path`/`agent_role`; there is no
+  schema-level distinction that explains the four failures.
+- [x] Added `sesh-hound --codex-repair-report <id-or-name> --json` on
+  `TOOLS-OF/local-agent-discovery` branch
+  `codex/codex-native-subagent-discovery`, commit `98de740`. It emits a
+  read-only mapping with historical IDs, candidate control IDs, edge status,
+  history/source metadata, and explicit `unverified` control status.
 
 ### Repair hypothesis and next actions
 
@@ -335,9 +345,13 @@ caught and corrected.
   parent edge, lifecycle status, and the identifier returned by native spawn.
   Do not create this experiment without explicit human approval; the goal is
   diagnosis, not staffing a replacement child.
-- [ ] Build a read-only bridge or repair report mapping historical child IDs
-  to live control handles where verified, flagging stale or quarantined
-  children, and refusing to relabel a new child as an old identity.
+- [x] Build a read-only bridge or repair report mapping historical child IDs
+  to candidate control handles, flagging missing thread rows, and refusing to
+  relabel a new child as an old identity. The report deliberately stops short
+  of claiming that the current control service owns those handles.
+- [ ] Add live verification or an authorized reattach path once the current
+  harness exposes a registry lookup or resume operation for historical native
+  children.
 - [ ] If the current harness provides an authorized reattach or resume path,
   use it only after the mapping is independently verified. Otherwise document
   the exact control-plane blocker and preserve the original children as
