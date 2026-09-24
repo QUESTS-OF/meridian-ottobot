@@ -299,12 +299,12 @@ caught and corrected.
 
 ## Open — repair native Codex child access (2026-09-24)
 
-- [ ] **Restore control-plane access to the four existing Meridian children** —
+- [x] **Restore control-plane access to the four existing Meridian children** —
   Bernoulli, Nietzsche, Anscombe, and Galileo are the four original native
   child records in `CARDS-OF/meridian-ottobot/agents.json`. The current Codex
   state database also contains one additional open edge named Socrates; that
-  is an inventory discrepancy to explain, not permission to silently adopt a
-  fifth child.
+  remains an inventory discrepancy to explain, not permission to silently
+  adopt a fifth child.
 
 ### Verified starting evidence
 
@@ -337,13 +337,20 @@ caught and corrected.
   contribution: `QUESTS-OF/meridian-ottobot#1` and
   `TOOLS-OF/local-agent-discovery#16`. Neither has been merged or treated as
   approval to reattach a child.
+- [x] Native `resume_agent` accepted the original IDs for Bernoulli, Nietzsche,
+  Anscombe, and Galileo. A native `send_input` identity check reached each
+  original child, and `wait_agent` returned the matching tokens
+  `BERNOUILLI-REATTACHED`, `NIETZSCHE-REATTACHED`, `ANSCOMBE-REATTACHED`, and
+  `GALILEO-REATTACHED`. This is verified recovery of the four-child control
+  path, not merely database discovery.
 
 ### Repair hypothesis and next actions
 
-- [ ] Determine which live registry or service-local handle the current
-  `multi_agent_v1` control surface accepts, and whether historical
-  `thread_spawn_edges.child_thread_id` values are intentionally non-resumable
-  after harness restart or merely missing from the active registry.
+- [x] Determine the usable reattach path: the current native harness accepts
+  the historical `thread_spawn_edges.child_thread_id` through
+  `multi_agent_v1.resume_agent`, after which `send_input` and `wait_agent`
+  operate against the same original identity. The earlier failure was a stale
+  or uninitialized live control handle, not a need to mint replacement IDs.
 - [ ] Compare one newly created native child record with historical rows
   before attempting repair. Record schema, `source`, `agent_path`, model,
   parent edge, lifecycle status, and the identifier returned by native spawn.
@@ -356,10 +363,9 @@ caught and corrected.
 - [ ] Add live verification or an authorized reattach path once the current
   harness exposes a registry lookup or resume operation for historical native
   children.
-- [ ] If the current harness provides an authorized reattach or resume path,
-  use it only after the mapping is independently verified. Otherwise document
-  the exact control-plane blocker and preserve the original children as
-  historical native records rather than fabricating replacements.
+- [x] Use the authorized reattach path only after independently mapping the
+  historical IDs. All four original children passed that check; no replacement
+  child was created.
 
 ### Progress rule
 
