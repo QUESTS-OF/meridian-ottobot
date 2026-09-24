@@ -297,3 +297,57 @@ caught and corrected.
   memory file's "77th compaction summary is encrypted" claim, which this
   independently corroborates rather than just re-asserts.
 
+## Open — repair native Codex child access (2026-09-24)
+
+- [ ] **Restore control-plane access to the four existing Meridian children** —
+  Bernoulli, Nietzsche, Anscombe, and Galileo are the four original native
+  child records in `CARDS-OF/meridian-ottobot/agents.json`. The current Codex
+  state database also contains one additional open edge named Socrates; that
+  is an inventory discrepancy to explain, not permission to silently adopt a
+  fifth child.
+
+### Verified starting evidence
+
+- [x] The current Codex state database contains `threads` and
+  `thread_spawn_edges`. The Meridian root has five open child edges, and the
+  four card-registered children resolve to their recorded native thread IDs
+  and nicknames.
+- [x] The old `sesh-hound --subagents <value>` path did not resolve names:
+  it treated the value as a rollout UUID and searched for legacy
+  `environments.subagents`. `sesh-hound --subagents meridian` returned
+  nothing even though native edges existed.
+- [x] A read-only discovery contribution exists on local branch
+  `codex/codex-native-subagent-discovery` at `42b928f` in
+  `TOOLS-OF/local-agent-discovery`. It resolves parent by UUID, name, title,
+  nickname, or role and reports exact child edge status.
+- [x] The native control call was tested with Bernoulli’s recorded child ID
+  and returned `agent ... not found`. Discovery and control are separate
+  surfaces; the database record alone is not a resumable control handle.
+
+### Repair hypothesis and next actions
+
+- [ ] Determine which live registry or service-local handle the current
+  `multi_agent_v1` control surface accepts, and whether historical
+  `thread_spawn_edges.child_thread_id` values are intentionally non-resumable
+  after harness restart or merely missing from the active registry.
+- [ ] Compare one newly created native child record with historical rows
+  before attempting repair. Record schema, `source`, `agent_path`, model,
+  parent edge, lifecycle status, and the identifier returned by native spawn.
+  Do not create this experiment without explicit human approval; the goal is
+  diagnosis, not staffing a replacement child.
+- [ ] Build a read-only bridge or repair report mapping historical child IDs
+  to live control handles where verified, flagging stale or quarantined
+  children, and refusing to relabel a new child as an old identity.
+- [ ] If the current harness provides an authorized reattach or resume path,
+  use it only after the mapping is independently verified. Otherwise document
+  the exact control-plane blocker and preserve the original children as
+  historical native records rather than fabricating replacements.
+
+### Progress rule
+
+Update this quest after each evidence-bearing step. A child is not marked
+recovered merely because its row exists in Codex state or discovery prints its
+name. Recovery requires a successful native control operation against the
+original child identity, followed by a verifiable reply from that same child.
+Do not use wmux, sibling Codex tasks, or Claude-side clones as a substitute for
+this test.
