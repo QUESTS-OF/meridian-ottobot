@@ -333,6 +333,10 @@ caught and corrected.
   `codex/codex-native-subagent-discovery`, commit `98de740`. It emits a
   read-only mapping with historical IDs, candidate control IDs, edge status,
   history/source metadata, and explicit `unverified` control status.
+- [x] Opened review PRs for the durable quest record and the discovery-tool
+  contribution: `QUESTS-OF/meridian-ottobot#1` and
+  `TOOLS-OF/local-agent-discovery#16`. Neither has been merged or treated as
+  approval to reattach a child.
 
 ### Repair hypothesis and next actions
 
